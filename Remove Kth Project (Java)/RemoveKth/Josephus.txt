@@ -1,0 +1,218 @@
+package josephus;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+public class Josephus {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) throws IOException {
+        // TODO code application logic here
+        FileDriver files = null;
+        try {
+            files = new FileDriver();
+        } catch (IOException ex) {
+            Logger.getLogger(Josephus.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        int M = 0;
+        int N = 0;
+        //int M = Integer.parseInt(args[0]);
+        //int N = Integer.parseInt(args[1]);
+        do{
+            String textline = "";
+            for(int i = 0; i < 3; i++){
+                 textline = files.getNextLine();
+                if( i == 0)
+                    files.updateResults(textline);
+                if( i == 1){
+                    M = Integer.parseInt(textline);
+                    System.out.println(M);
+                }
+                if(i == 2){
+                    N = Integer.parseInt(textline);
+                    System.out.println(N);
+                }
+                    
+            }
+            
+            JoseQ queue = new JoseQ();
+            int i = N;
+            while(i > 0){
+                queue.Enqueue(N-i);
+                i--;
+            }
+            int[] eliminated = new int[N-1];
+            int safe = 0;
+            i = 1;
+            int j = 0;
+            while(queue.hasNext()){
+                int position = queue.Dequeue();
+                if(!queue.hasNext()){
+                    safe = position;
+                }else if(i == M){
+                    eliminated[j]= position;
+                    j++;
+                    i = 1;
+                }else{
+                    queue.Enqueue(position);
+                    i++;
+                }
+            }
+            files.updateResults("Josephus Problem. M: "+M+" N: "+N);
+            files.updateResults("Positions Eliminated: "+Arrays.toString(eliminated));
+            files.updateResults("Safe Position: "+safe+"\n");
+
+
+            
+            System.out.println("Josephus Problem. M: "+M+" N: "+N);
+            System.out.println("Positions Eliminated: "+Arrays.toString(eliminated));
+            System.out.println("Safe Position: "+safe);
+            
+        }while(files.fileReady());
+        files.closeFiles();
+        
+    }
+    
+}
+
+class FileDriver{
+    private FileReader file;
+    private FileWriter results;
+    private BufferedReader br;
+    private BufferedWriter bw;
+    private String resultstring;
+
+    public FileDriver() throws FileNotFoundException, IOException {
+        file = new FileReader("JoseTestData.txt");
+        br = new BufferedReader(file);
+        results = new FileWriter("JosephusTestResults.txt");
+        bw = new BufferedWriter(results);
+        resultstring = br.readLine(); //gets the programmer name from the file
+        resultstring += br.readLine(); // gets course name from file
+    }
+    
+    public String getNextLine(){
+        String test = "";
+        try {
+            test = br.readLine();
+        } catch (IOException ex) {
+            Logger.getLogger(FileDriver.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return test;
+    }
+    
+    public void updateResults(String data){
+        resultstring += data+"\n";
+    }
+    
+    public void closeFiles(){
+        try {
+            bw.write(resultstring);
+            bw.flush();
+        } catch (IOException ex) {
+            Logger.getLogger(FileDriver.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public boolean fileReady() throws IOException{
+        return br.ready();
+    }
+}
+
+package josephus;
+
+
+public class JoseQ{
+    private JoseList list;
+    
+    public JoseQ(){
+        list = new JoseList();
+    }
+    
+    public void Enqueue(int data){
+        list.addItem(data);
+    }
+    
+    public int Dequeue(){
+        int retval = list.Remove();
+        return retval;
+    }
+    
+    public boolean hasNext(){
+        boolean retval = false;
+        if(list.getCount()>0)
+            retval = true;
+        return retval;
+    }
+}
+
+
+package josephus;
+
+public class JoseList {
+    private Node head;
+    private Node tail;
+    private int count;
+    
+    public void addItem(int input){
+        Node temp = new Node();
+        temp.info = input;
+        if(count < 1){
+            head = temp;
+            tail = temp;
+            temp.next = head;
+        }else{
+            tail.next = temp;
+            temp.next = head;
+            tail = temp;
+        }
+        count++;
+    }
+    
+    public int[] JosephusRemove(int M){
+        int[] retval = new int[count];
+        int j = 0;
+        Node current = head;
+        Node prev = head;
+        while(count>1){
+            for(int i = 0; i<M; i++){
+                prev = current;
+                current = current.next;
+            }
+            prev.next = current.next;
+            retval[j] = current.info;
+            j++;
+            count--;
+        }
+        retval[j] = current.info;
+        return retval;
+    }
+    
+    public int Remove(){
+        int retval = 0;
+        Node current = head;
+        retval = current.info;
+        head = current.next;
+        tail.next = head;
+        count--;
+        return retval;
+    }
+    
+    public int getCount(){
+        return count;
+    }
+    
+    class Node{
+        int info;
+        Node next;
+    }
+}

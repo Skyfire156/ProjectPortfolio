@@ -1,0 +1,29 @@
+<project name="SlipHypoTester" basedir=".">
+
+	
+    <target name="clean">
+        <delete dir="build"/>
+    </target>
+
+    <target name="compile">
+        <mkdir dir="build/classes"/>
+        <javac srcdir="." destdir="build/classes" classpath="*.java"/>
+    </target>
+
+    <target name="build" depends="compile">
+        <jar destfile="build/SlipHypoTester.jar" basedir="build/classes">
+            <manifest>
+                <attribute name="Main-Class" value="sliphypotester.SlipHypoTester"/>
+            </manifest>
+        </jar>
+		<jar destfile="build/Slip.jar" basedir="build/classes">
+        </jar>
+		<jar destfile="build/ThreeSlipStrategy.jar" basedir="build/classes">
+        </jar>
+    </target>
+	
+    <target name="run">
+        <java jar="./build/SlipHypoTester.jar" fork="true"/>
+    </target>
+
+</project>

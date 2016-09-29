@@ -1,0 +1,182 @@
+import java.util.Map;
+/**
+ * Defines a passenger arrival function.
+ * An arrival function provides the number of passengers
+ * expected to arrive during a specified interval of time.
+ * Resolution is by minute (1440 discrete minutes per day).
+ * <P>
+ * The arrival function is comprised of
+ * constituent functions corresponding to
+ * specific time periods:
+ * Off-Peak, Morning-Peak, and Evening-Peak.
+ * Off-Peak is modeled by uniform distribution.
+ * Morning-Peak and Evening-Peak are modeled by
+ * Poisson distributions about their respective means
+ * of 07:30 and 17:00.
+ * </P><P>
+ * The function chooses the maximum of the
+ * values of each of the constituent functions.
+ * </P>
+ * @author Dr. Jody Paul
+ * @version 1.1 ($Id$)
+ */
+public class PassengerArrivalFunction {
+    /** The number of discrete arrival times. */
+    private static final int NUMBER_OF_ARRIVAL_TIMES = Time.HOURS_PER_DAY * Time.MINUTES_PER_HOUR;
+
+    /** Default number of passenger arrivals per station per day. */
+    public static final int DEFAULT_ARRIVALS_PER_DAY = 5000;
+
+    /** Default fraction of passenger arrivals during the morning peak period. */
+    public static final double MORNING_PEAK_FRACTION = 0.40;
+
+    /** Default fraction of passenger arrivals during the evening peak period. */
+    public static final double EVENING_PEAK_FRACTION = 0.35;
+
+    /** Default fraction of passenger arrivals during non-peak times. */
+    public static final double OFF_PEAK_FRACTION = 1.00 - (MORNING_PEAK_FRACTION + EVENING_PEAK_FRACTION);
+
+    /** Default probability distribution for Off-Peak. */
+    public static final ProbabilityDistribution DEFAULT_OFF_PEAK_DIST = new Uniform();
+
+    /** Default probability distribution for Morning-Peak. */
+    public static final ProbabilityDistribution DEFAULT_MORNING_PEAK_DIST = new Poisson();
+
+    /** Default probability distribution for Evening-Peak. */
+    public static final ProbabilityDistribution DEFAULT_EVENING_PEAK_DIST = new Poisson();
+
+    /** Start time for Off-Peak. */
+    public static final Time OFF_PEAK_START = new Time(0, 00);
+    /** End time for Off-Peak. */
+    public static final Time OFF_PEAK_END = new Time(23, 59);
+    /** Mean time for Off-Peak. */
+    public static final Time MEAN_OFF_PEAK_TIME = new Time(12, 00);
+
+    /** Start time for Morning-Peak. */
+    public static final Time MORNING_PEAK_START = new Time(6, 00);
+    /** End time for Morning-Peak. */
+    public static final Time MORNING_PEAK_END = new Time(9, 00);
+    /** Mean time for Morning-Peak. */
+    public static final Time MEAN_MORNING_PEAK_TIME = new Time(7, 30);
+
+    /** Start time for Evening-Peak. */
+    public static final Time EVENING_PEAK_START = new Time(15, 30);
+    /** End time for Evening-Peak. */
+    public static final Time EVENING_PEAK_END = new Time(18, 30);
+    /** Mean time for Evening-Peak. */
+    public static final Time MEAN_EVENING_PEAK_TIME = new Time(17, 0);
+
+    /** Enumeration of time periods. */
+    public enum TimePeriod {
+        OFF_PEAK("Off Peak"),
+        MORNING_PEAK("Morning Peak"),
+        EVENING_PEAK("Evening Peak"),
+        ALL_DAY("All Day");
+        /** Human-oriented description. */
+        private String descriptor;
+        /**
+         * Constructs a time period with an associated description.
+         * @param description the description
+         */
+        TimePeriod(final String description) {
+            this.descriptor = description;
+        }
+    }
+
+    /**
+     * Constructs a default passenger arrival function.
+     */
+    public PassengerArrivalFunction() {
+    }
+
+    /**
+     * Constructs a passenger arrival function,
+     * using specified expected number of passenger arrivals per day.
+     * Defaults used for amount and distributions of passenger arrivals
+     * associated with time periods.
+     *
+     * @param expectedPassengersPerDay the total number of passengers expected per day
+     */
+    public PassengerArrivalFunction(final int expectedPassengersPerDay) {
+    }
+
+    /**
+     * Constructs a passenger arrival function,
+     * using specified expected number of passenger arrivals per day
+     * and probability distributions for time periods.
+     * Default used for portion of total passenger arrivals
+     * occurring during each time period.
+     *
+     * @param expectedPassengersPerDay the total number of passengers expected per day
+     * @param offPeakDistribution the probability distribution class for off-peak periods
+     * @param morningPeakDistribution the probability distribution class for morning-peak
+     * @param eveningPeakDistribution the probability distribution class for evening-peak
+     */
+    public PassengerArrivalFunction(final int expectedPassengersPerDay,
+                                    final ProbabilityDistribution offPeakDistribution,
+                                    final ProbabilityDistribution morningPeakDistribution,
+                                    final ProbabilityDistribution eveningPeakDistribution) {
+    }
+
+    /**
+     * Constructs a passenger arrival function,
+     * using specified expected number of passenger arrivals per day,
+     * probability distributions for time periods, and fraction of
+     * arrivals for time periods.
+     *
+     * @param expectedPassengersPerDay the total number of passengers expected per day
+     * @param offPeakDistribution the probability distribution class for off-peak periods
+     * @param morningPeakDistribution the probability distribution class for morning-peak
+     * @param eveningPeakDistribution the probability distribution class for evening-peak
+     * @param fractionOffPeak the fraction of arrivals occuring during off-peak periods
+     * @param fractionMorningPeak the fraction of arrivals occuring during the morning-peak
+     * @param fractionEveningPeak the fraction of arrivals occuring during the evening-peak
+     */
+    public PassengerArrivalFunction(final int expectedPassengersPerDay,
+                                    final ProbabilityDistribution offPeakDistribution,
+                                    final ProbabilityDistribution morningPeakDistribution,
+                                    final ProbabilityDistribution eveningPeakDistribution,
+                                    final double fractionOffPeak,
+                                    final double fractionMorningPeak,
+                                    final double fractionEveningPeak) {
+    }
+
+    /**
+     * Retrieves the number of passengers arriving
+     * at each discrete minute throughout the day.
+     * @return all computed values of the function
+     */
+    public int[] passengerArrivals() {
+        return null;
+    }
+
+    /**
+     * Determines the number of passengers arriving
+     * in the specified interval.
+     * @param startTime the beginning of the interval (inclusive)
+     * @param endTime the end of the interval (exclusive)
+     * @return the number of passengers arriving during the specified interval
+     */
+    public Integer numberOfArrivingPassengers(final Time startTime, final Time endTime) {
+        return null;
+    }
+
+    /**
+     * Retrieves the underlying functions values.
+     * @return all computed values of the composing functions
+     */
+    public Map<TimePeriod, int[]> composingValues() {
+        return null;
+    }
+
+    /**
+     * Determines the maximum of three values.
+     * @param value1 first value
+     * @param value2 second value
+     * @param value3 third value
+     * @return the maximum of the three values
+     */
+    private static double maximum(final double value1, final double value2, final double value3) {
+        return Math.max(value1, Math.max(value2, value3));
+    }
+}

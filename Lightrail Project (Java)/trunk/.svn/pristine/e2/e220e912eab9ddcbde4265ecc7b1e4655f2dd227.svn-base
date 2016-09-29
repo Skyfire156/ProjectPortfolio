@@ -1,0 +1,57 @@
+import java.util.List;
+import static org.junit.Assert.*;
+import org.junit.Test;
+/**
+ * Tests for class Route.
+ *
+ * @author  Dr. Jody Paul
+ * @version 1.1 ($Id$)
+ */
+public class RouteTest {
+    @Test
+    public void emptyRouteTest() {
+        List<Station> theStations;
+        List<Time> theTimes;
+
+        Route emptyRoute = new Route();
+        theStations = emptyRoute.stations();
+        assertEquals(0, theStations.size());
+        theTimes = emptyRoute.travelTimes();
+        assertEquals(0, theTimes.size());
+    }
+
+    @Test
+    public void createRouteTest() {
+        List<Station> theStations;
+        List<Time> theTimes;
+
+        Route buildARoute = new Route();
+        Station station0 = new Station("Initial Station");
+        buildARoute.addStation(station0, new Time());
+        assertEquals(1, buildARoute.stations().size());
+        assertEquals(station0, buildARoute.stations().get(0));
+
+        Station station1 = new Station("Station One");
+        buildARoute.addStation(station1, new Time(0, 15));
+        theStations = buildARoute.stations();
+        assertTrue(theStations.contains(station0));
+        assertTrue(theStations.contains(station1));
+        assertEquals(station0, theStations.get(0));
+        assertEquals(station1, theStations.get(1));
+        theTimes = buildARoute.travelTimes();
+        assertEquals(1, theTimes.size());
+        assertEquals(new Time(0, 15), theTimes.get(0));
+
+        Station station2 = new Station("Station Two");
+        buildARoute.addStation(station2, new Time(1, 10));
+        theStations = buildARoute.stations();
+        assertEquals(3, theStations.size());
+        assertEquals(station0, theStations.get(0));
+        assertEquals(station1, theStations.get(1));
+        assertEquals(station2, theStations.get(2));
+        theTimes = buildARoute.travelTimes();
+        assertEquals(2, theTimes.size());
+        assertEquals(new Time(0, 15), theTimes.get(0));
+        assertEquals(new Time(1, 10), theTimes.get(1));
+    }
+}

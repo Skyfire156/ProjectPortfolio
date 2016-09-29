@@ -1,0 +1,1 @@
+This application was developed individually in preparation for job hunting.  It uses Java and makes use of JavaFX for the gui.  It is a simple application so far, and still under development.  I created it for the purpose of populating a resume with desireable keywords in an effort to bring my resume nearer the top of the proverbial pile.  

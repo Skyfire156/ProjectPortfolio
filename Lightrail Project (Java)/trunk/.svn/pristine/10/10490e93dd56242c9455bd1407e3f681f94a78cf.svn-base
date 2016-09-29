@@ -1,0 +1,80 @@
+import java.util.Queue;
+/**
+ * A station along a light-rail route.
+ * <P>
+ * Each station has a queue of passengers.
+ * Passengers arrive in accordance with the
+ * station's passenger arrival function.
+ * </P>
+ * @author Dr. Jody Paul
+ * @version 1.0 ($Id$)
+ */
+public class Station {
+    /**
+     * Constructs a light-rail station with a given name
+     * and a default passenger arrival function.
+     * The initial queue of waiting passengers is empty.
+     * @param name the name of this station
+     */
+    public Station(final String name) {
+    }
+
+    /**
+     * Constructs a light-rail station with a given name
+     * and specified passenger arrival function.
+     * The initial queue of waiting passengers is empty.
+     * @param name the name of this station
+     * @param arrivalFn the passenger arrival function
+     */
+    public Station(final String name,
+                   final PassengerArrivalFunction arrivalFn) {
+    }
+
+    /**
+     * Add a new passenger to the waiting queue.
+     * @param passenger the passenger to be queued
+     * @return <tt>true</tt> if the passenger was added to the queue;
+     *         <tt>false</tt> otherwise
+     */
+    public boolean addPassenger(final Passenger passenger) {
+        return false;
+    }
+
+    /**
+     * Retrieves and removes the next passenger from the waiting queue.
+     * @return the passenger at the head of the queue;
+     *         <tt>null</tt> if there are no passengers waiting
+     */
+    public Passenger nextPassenger() {
+        return null;
+    }
+
+    /**
+     * Retrieves the passengers awaiting boarding as a queue.
+     * @return the passengers ordered by arrival at this station
+     */
+    public Queue<Passenger> passengers() {
+        return null;
+    }
+
+    /**
+     * Retrieves the number of passengers waiting at this station.
+     * @return the number of passengers
+     */
+    public int numberOfPassengersWaiting() {
+        return -42;
+    }
+
+    /**
+     * Retrieves the passenger arrival function for this station.
+     * @return the passenger arrival function
+     */
+    public PassengerArrivalFunction passengerArrivalFn() {
+        return null;
+    }
+
+    @Override
+    public String toString() {
+        return "[Station]";
+    }
+}

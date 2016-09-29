@@ -1,0 +1,41 @@
+<project name="oneLane" basedir="." default="test">
+
+	
+    <target name="clean">
+        <delete dir="build"/>
+		<delete dir="documentation"/>
+    </target>
+
+    <target name="compile" depends="clean">
+        <mkdir dir="build/classes"/>
+        <javac srcdir="." destdir="build/classes" classpath="*.java"/>
+    </target>
+
+    <target name="build" depends="compile">
+        <jar destfile="build/OneLane.jar" basedir="build/classes">
+            <manifest>
+                <attribute name="Main-Class" value="onelane.OneLane"/>
+            </manifest>
+        </jar>
+		<jar destfile="build/Car.jar" basedir="build/classes">
+        </jar>
+    </target>
+	
+    <target name="run" depends="build,document">
+        <java jar="./build/OneLane.jar" fork="true"/>
+    </target>
+	
+	<target name="test" depends="run">
+		<junit>
+			<batchtest fork="yes">
+				<fileset dir="." includes="*Test.java"/>
+			</batchtest>
+		</junit>
+	</target>
+	
+	<target name="document">
+		<mkdir dir="documentation"/>
+		<javadoc sourcefiles="OneLane.java,Car.java" destdir="documentation"/>
+	</target>
+
+</project>

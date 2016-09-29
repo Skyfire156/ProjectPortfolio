@@ -1,0 +1,59 @@
+<project name="JobHuntHelper" basedir="." default="run" xmlns:fx="javafx:com.sun.javafx.tools.ant">
+    <property name="JAVA_HOME" value="C:/Program Files/Java/jdk1.8.0_11"/>
+
+    <target name="default">
+        <taskdef resource="com/sun/javafx/tools/ant/antlib.xml"      
+                uri="javafx:com.sun.javafx.tools.ant"
+                classpath="C:/Program Files/Java/jdk1.8.0_11/lib/ant-javafx.jar"/>    
+    </target>
+
+    <target name="build2" depends="build">
+        <fx:application id="JobHunt"
+        name="JobHuntHelper"
+        mainClass="HunterGUI"/>
+ 
+      <fx:resources id="appRes">
+        <fx:fileset dir="build/dist" includes="HunterGUI.jar"/>
+        <fx:fileset dir="build/resources"/>
+      </fx:resources>
+ 
+      <fx:jar destfile="build/HunterHelper.jar">
+        <fx:application refid="JobHunt"/>
+        <fx:resources refid="appRes"/>
+        <fx:fileset dir="build/classes"/>
+      </fx:jar>
+    </target>
+
+
+	<target name="clean" depends="default">
+        <delete dir="build"/>
+		<delete dir="documentation"/>
+    </target>
+
+    <target name="compile" depends="clean">
+        <mkdir dir="build/classes"/>
+        <mkdir dir="build/dist"/>
+        <mkdir dir="build/resources"/>
+        <copy file="HunterGUIfx.fxml" todir="build/resources"/>
+        <copy file="hunterguifx.css" todir="build/resources"/>
+        <javac srcdir="." destdir="build/classes" classpath="*.java"/>
+    </target>
+
+    <target name="build" depends="compile">
+        <jar destfile="build/dist/HunterGUI.jar" basedir="build/classes">
+            <manifest>
+                <attribute name="Main-Class" value="HunterGUI"/>
+            </manifest>
+        </jar>
+        <jar destfile="build/dist/FileDriver.jar" basedir="build/classes">
+        </jar>
+        <jar destfile="build/dist/HunterGUIfxController.jar" basedir="build/classes">
+        </jar>
+        <jar destfile="build/dist/JobHuntHelper.jar" basedir="build/classes">
+        </jar>
+    </target>
+	
+    <target name="run" depends="build2">
+        <java jar="./build/HunterHelper.jar" fork="true"/>
+    </target>
+</project>

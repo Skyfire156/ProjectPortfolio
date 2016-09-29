@@ -1,0 +1,18 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+
+}
+
+.outputText {
+    -fx-background-color: black;
+    -fx-font-color: white;
+    -fx-text-fill: white;
+    
+}
+
+.outputText .content {
+    -fx-background-color: black;
+}

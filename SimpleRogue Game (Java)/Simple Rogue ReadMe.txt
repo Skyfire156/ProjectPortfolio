@@ -1,0 +1,1 @@
+Simple Rogue is a text based game created in Java, using Swing for the GUI.  It was one of the first projects I worked on in Java, before starting school for Computer Science. As such it is rough, but it is a complete, working game, and for that I am fairly proud of it.  I've included some screenshots of the working game in the folder. 

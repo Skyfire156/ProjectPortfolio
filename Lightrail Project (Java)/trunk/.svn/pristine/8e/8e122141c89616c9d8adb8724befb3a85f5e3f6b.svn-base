@@ -1,0 +1,84 @@
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Queue;
+
+import static org.junit.Assert.*;
+import org.junit.Test;
+/**
+ * Tests for class Station.
+ *
+ * @author  Dr. Jody Paul
+ * @version 1.1 ($Id$)
+ */
+public class StationTest {
+    /**
+     * Verifies adding passengers to the station queue.
+     */
+    @Test
+    public void addPassengerTest() {
+        Station stat1 = new Station("Test Station");
+        Station stat2 = new Station("Dest");
+        Passenger pass1 = new Passenger(stat1, stat2);
+        assertEquals(0, stat1.numberOfPassengersWaiting());
+        assertEquals(0, stat1.passengers().size());
+        assertTrue(stat1.addPassenger(pass1));
+        assertEquals(1, stat1.numberOfPassengersWaiting());
+        Queue<Passenger> passQ = stat1.passengers();
+        assertEquals(1, passQ.size());
+        assertEquals(true, passQ.contains(pass1));
+        List<Passenger> plist = new ArrayList<Passenger>();
+        for (int i = 0; i < 10; i++) {
+            Passenger p = new Passenger(stat1, stat2);
+            plist.add(p);
+            assertTrue(stat1.addPassenger(p));
+        }
+        assertEquals(11, stat1.numberOfPassengersWaiting());
+        passQ = stat1.passengers();
+        assertEquals(11, passQ.size());
+        assertTrue(passQ.contains(pass1));
+        assertTrue(passQ.containsAll(plist));
+    }
+
+    /**
+     * Verifies removing passengers from the station queue.
+     */
+    @Test
+    public void nextPassengerTest() {
+        Station stat1 = new Station("Test Station");
+        Station stat2 = new Station("Dest");
+        Passenger pass1 = new Passenger(stat1, stat2);
+        assertTrue(stat1.addPassenger(pass1));
+        List<Passenger> plist = new ArrayList<Passenger>();
+        for (int i = 0; i < 10; i++) {
+            Passenger p = new Passenger(stat1, stat2);
+            plist.add(p);
+            assertTrue(stat1.addPassenger(p));
+        }
+        assertEquals(pass1, stat1.nextPassenger());
+        assertFalse(stat1.passengers().contains(pass1));
+        assertEquals(10, stat1.numberOfPassengersWaiting());
+        assertEquals(10, stat1.passengers().size());
+        assertTrue(stat1.passengers().containsAll(plist));
+        for (int i = 0; i < 10; i++) {
+            assertEquals(plist.get(i), stat1.nextPassenger());
+            assertEquals(9 - i, stat1.numberOfPassengersWaiting());
+            assertFalse(stat1.passengers().contains(plist.get(i)));
+        }
+        assertEquals(0, stat1.numberOfPassengersWaiting());
+        assertEquals(0, stat1.passengers().size());
+    }
+
+    /**
+     * Verifies passenger arrival function attribute.
+     */
+    @Test
+    public void passengerArrivalFunctionTest() {
+        Station stat1 = new Station("Station One");
+        assertNotNull(stat1.passengerArrivalFn());
+        stat1 = new Station("Station One", new PassengerArrivalFunction(1000));
+        PassengerArrivalFunction paf = new PassengerArrivalFunction(2000);
+        Station stat2 = new Station("Station Two", paf);
+        assertEquals(paf, stat2.passengerArrivalFn());
+        assertFalse(paf.equals(stat1.passengerArrivalFn()));
+    }
+}

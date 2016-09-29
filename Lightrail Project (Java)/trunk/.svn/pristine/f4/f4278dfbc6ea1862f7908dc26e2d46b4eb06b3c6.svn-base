@@ -1,0 +1,29 @@
+import static org.junit.Assert.*;
+import org.junit.Test;
+/**
+ * Tests for the Schedule class.
+ *
+ * @author  Dr. Jody Paul
+ * @version 1.0 ($Id$)
+ */
+public class ScheduleTest {
+    @Test
+    public void buildScheduleTest() {
+        Schedule sched = new Schedule();
+        assertEquals(0, sched.departureTimes().size());
+        sched.addDeparture(new Time(0, 30));
+        sched.addDeparture(new Time(1, 30));
+        sched.addDeparture(new Time(2, 30));
+        assertEquals(3, sched.departureTimes().size());
+        for (int i = 0; i < 24; i++) {
+            sched.addDeparture(new Time(i, 15));
+        }
+        assertEquals(27, sched.departureTimes().size());
+        Time latest = new Time(0, 0, 0);
+        for (Time t : sched.departureTimes()) {
+            assertTrue(0 < t.compareTo(latest));
+            latest = t;
+        }
+    }
+}
+

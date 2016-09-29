@@ -1,0 +1,19 @@
+Testsuite: LightRailSimulationDriverTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.093 sec
+------------- Standard Output ---------------
++==============================+
+| Light Rail Simulation Driver |
++==============================+
+
+[Initial] Model State:
+Current time: 00:00:00
+00:00:00
+
+
+[Final] Model State:
+Current time: 23:59:00
+00:00:00
+
+------------- ---------------- ---------------
+
+Testcase: driverTest took 0.062 sec

@@ -1,0 +1,12 @@
+Testsuite: SimulationTest
+Tests run: 4, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.078 sec
+
+Testcase: testEmptyModel took 0 sec
+Testcase: testMultipleDepartures took 0.015 sec
+	FAILED
+expected:<1> but was:<0>
+junit.framework.AssertionFailedError: expected:<1> but was:<0>
+	at SimulationTest.testMultipleDepartures(SimulationTest.java:102)
+
+Testcase: testRoute took 0.016 sec
+Testcase: testTrainDepartures took 0 sec

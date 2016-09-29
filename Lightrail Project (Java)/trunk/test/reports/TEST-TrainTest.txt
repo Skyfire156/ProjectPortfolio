@@ -1,0 +1,32 @@
+Testsuite: TrainTest
+Tests run: 19, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 0.063 sec
+
+Testcase: testAddingOnePassenger took 0 sec
+Testcase: overBoardTest took 0 sec
+Testcase: testEmptyTrain took 0 sec
+Testcase: disembarkNonBoardedCollectionTest took 0 sec
+Testcase: repeatBoardTest took 0 sec
+Testcase: disembarkNullTest took 0 sec
+Testcase: collectionSizeTest took 0 sec
+Testcase: boardAllTest took 0 sec
+	FAILED
+null
+junit.framework.AssertionFailedError
+	at TrainTest.boardAllTest(TrainTest.java:210)
+
+Testcase: disembarkAllTest took 0 sec
+Testcase: disembarkAllEmptyTrainTest took 0 sec
+Testcase: boardAllOverboardTest took 0 sec
+Testcase: passengersTest took 0 sec
+	FAILED
+null
+junit.framework.AssertionFailedError
+	at TrainTest.passengersTest(TrainTest.java:239)
+
+Testcase: capacityTest took 0 sec
+Testcase: ensureDeepCopyOfBoardedPassengersIsSameAsOriginal took 0 sec
+Testcase: multipleBoardTest took 0 sec
+Testcase: testFillingTrainToCapacity took 0 sec
+Testcase: disembarkTest took 0 sec
+Testcase: disembarkNonBoardedPassengerTest took 0 sec
+Testcase: disembarkAllNullTest took 0 sec

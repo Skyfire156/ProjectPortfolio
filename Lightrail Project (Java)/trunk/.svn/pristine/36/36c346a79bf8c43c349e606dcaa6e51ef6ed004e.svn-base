@@ -1,0 +1,27 @@
+import static org.junit.Assert.assertEquals;
+import org.junit.Test;
+/**
+ * Tests for class Passenger.
+ *
+ * @author  Dr. Jody Paul
+ * @version 1.0 ($Id$)
+ */
+public class PassengerTest {
+    /** Verifies start and destination stations. */
+    @Test
+    public void stationTest() {
+        Station station1 = new Station("Pass 1 Start");
+        Station station2 = new Station("Pass 1 Destination");
+        Passenger pass1 = new Passenger(station1, station2);
+        assertEquals(station1, pass1.start());
+        assertEquals(station2, pass1.destination());
+    }
+
+    /**
+     * Verifies exception for null station passed to constructor.
+     */
+     @Test(expected = IllegalArgumentException.class)
+     public void nullStationTest() {
+         Passenger pass1 = new Passenger(null, new Station("S1"));
+     }
+}

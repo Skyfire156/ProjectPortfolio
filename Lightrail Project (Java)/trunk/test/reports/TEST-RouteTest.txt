@@ -1,0 +1,16 @@
+Testsuite: RouteTest
+Tests run: 13, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.078 sec
+
+Testcase: testTimeListSizeFromEmptyObject took 0.016 sec
+Testcase: ensureDeepCopyOfTravelTimesIsSameAsOriginal took 0 sec
+Testcase: testTimesListObjectIsNonEmptyTimeObject took 0 sec
+Testcase: ensureListTakesThreeStationObjects took 0.016 sec
+Testcase: testTimeListForOnlyTwoNonEmtpyTimeObjects took 0 sec
+Testcase: testStationListForAddedObjects took 0.015 sec
+Testcase: testStaionListSizeFromEmptyObject took 0 sec
+Testcase: ensureObjectInRouteObjectStationListIsStationObject took 0 sec
+Testcase: ensureTimeListElementsEqualsTheNonEmptyTimeObjectsCreated took 0 sec
+Testcase: ensureStationListElementsEqualStationObjectsAdded took 0 sec
+Testcase: stationListSizeTestWithOneStation took 0 sec
+Testcase: testTimesListHasAddedObjectfromOnlyNonEmptyTimeObject took 0 sec
+Testcase: ensureDeepCopyOfStationsIsSameAsOriginal took 0 sec

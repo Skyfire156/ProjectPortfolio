@@ -1,0 +1,9 @@
+Testsuite: TimeTest
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.062 sec
+
+Testcase: durationTest took 0 sec
+Testcase: asMinutesTest took 0 sec
+Testcase: comparisonHoursMinutesTest took 0 sec
+Testcase: comparisonHoursMinutesSecondsTest took 0 sec
+Testcase: rolloverSecondsTest took 0 sec
+Testcase: rolloverMinutesTest took 0 sec

@@ -1,0 +1,34 @@
+/**
+ * Light-rail passenger.
+ * Each passenger is associated with a
+ * starting station and a destination station.
+ *
+ * @author Dr. Jody Paul
+ * @version 1.0 ($Id$)
+ */
+public class Passenger {
+    /**
+     * Constructs a passenger with specified source and destination stations.
+     * @param start the start station; must not be null
+     * @param destination the destination station; must not be null;
+     *                    must not be identical to the start station
+     */
+    public Passenger(final Station start, final Station destination) {
+    }
+
+    /**
+     * Retrieves the passenger's starting station.
+     * @return the start station
+     */
+    public Station start() {
+        return null;
+    }
+
+    /**
+     * Retrieves the passenger's destination station.
+     * @return the destination station
+     */
+    public Station destination() {
+        return null;
+    }
+}

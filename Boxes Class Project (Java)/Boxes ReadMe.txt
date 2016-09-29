@@ -1,0 +1,1 @@
+The Boxes Sim project was a project created for a Programming Pragmatics class.  It simulates the 3 box game to illustrate the Monty Hall problem and explore the different outcomes that can be expected between strategies that can be adopted for such a game.  

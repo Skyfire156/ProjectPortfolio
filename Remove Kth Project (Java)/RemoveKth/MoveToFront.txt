@@ -1,0 +1,176 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package movetofront;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/**
+ *
+ * @author natha_000
+ */
+public class MoveToFront {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        try {
+            // TODO code application logic here
+            MoveToFront prgm = new MoveToFront("MoveToFrontTest.txt");
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(MoveToFront.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(MoveToFront.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    private Node head;
+    private Node tail;
+    private int count;
+    
+    public MoveToFront(String input) throws FileNotFoundException, IOException{
+        FileDriver scan = new FileDriver();
+        int tick = 0;
+        do{
+            String temp = scan.getNextLine();
+            String ch = "";
+            if(tick == 0){
+                scan.updateResults(temp);
+                tick++;
+            }else{
+                scan.updateResults("input for testing");
+                scan.updateResults(temp);
+                for(int i = 0; i<temp.length(); i++){
+                    ch = temp.substring(i, i+1);
+                    //System.out.println(ch);
+                    int k = -1;
+                    if(count > 0)
+                        k = seek(ch);
+                    if(k>=0)
+                        remove(k);
+                    insert(ch);
+                }
+
+                String out = "";
+                while(count > 0){
+                    out += remove(0)+", ";
+                }
+                scan.updateResults("Resulting list from input:");
+                scan.updateResults(out);
+                tick--;
+            }
+            //System.out.println(out);
+        }while(scan.fileReady());
+        scan.closeFiles();
+    }
+    
+    public void insert(String c){
+        Node temp = new Node();
+        temp.data = c;
+        temp.next = head;
+        if(head != null)
+            head.prev = temp;
+        head = temp;
+        count++;
+        if(count == 1){
+            tail = temp;
+        }
+    }
+    
+    public String remove(int k){
+        String retval;
+        Node current = head;
+        for(int i = 0; i < k; i++){
+            current = current.next;
+        }
+        retval = current.data;
+        if(current.next != null)
+            current.next.prev = current.prev;
+        if(current.prev != null)
+            current.prev.next = current.next;
+        if(current == head)
+            head = current.next;
+        count--;
+        return retval;
+    }
+    
+    public int seek(String c){
+        int retval = 0;
+        Node current = head;
+        boolean check = false;
+        while(current.next != null){
+            if(current.data.equals(c)){
+                check = true;
+                break;
+            }
+            current = current.next;
+            retval++;
+        }
+        if(!check)
+            retval = -1;
+        return retval;
+    }
+    
+    class Node{
+        String data;
+        Node next;
+        Node prev;
+    }
+    
+}
+
+class FileDriver{
+    private FileReader file;
+    private FileWriter results;
+    private BufferedReader br;
+    private BufferedWriter bw;
+    private String resultstring;
+
+    public FileDriver() throws FileNotFoundException, IOException {
+        file = new FileReader("MoveToFrontTest.txt");
+        br = new BufferedReader(file);
+        results = new FileWriter("MoveToFrontTestResults.txt");
+        bw = new BufferedWriter(results);
+        resultstring = br.readLine(); //gets the programmer name from the file
+        resultstring += br.readLine(); // gets name of test data author(s)
+    }
+    
+    public String getNextLine(){
+        String test = "";
+        try {
+            test = br.readLine();
+        } catch (IOException ex) {
+            Logger.getLogger(FileDriver.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return test;
+    }
+    
+    public void updateResults(String data){
+        resultstring += data+"\n";
+    }
+    
+    public void closeFiles(){
+        try {
+            bw.write(resultstring);
+            bw.flush();
+        } catch (IOException ex) {
+            Logger.getLogger(FileDriver.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public boolean fileReady() throws IOException{
+        return br.ready();
+    }
+}

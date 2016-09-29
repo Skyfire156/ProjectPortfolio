@@ -1,0 +1,39 @@
+import java.util.List;
+/**
+ * Schedule for departures of trains from the starting point of a route.
+ * A schedule is comprised of departure times.
+ * All departure times are unique.
+ *
+ * @author Dr. Jody Paul
+ * @version 1.0 ($Id$)
+ */
+public class Schedule {
+    /**
+     * Constructs an empty schedule.
+     */
+    public Schedule() {
+    }
+
+    /**
+     * Copy constructor.
+     * @param orig the schedule to be duplicated
+     */
+    public Schedule(final Schedule orig) {
+    }
+
+    /**
+     * Add a departure time to the schedule.
+     * @param departureTime the departure time
+     */
+    public void addDeparture(final Time departureTime) {
+    }
+
+    /**
+     * Returns the schedule as a list of departure times
+     * in ascending order by time.
+     * @return list of departure times
+     */
+    public List<Time> departureTimes() {
+        return null;
+    }
+}

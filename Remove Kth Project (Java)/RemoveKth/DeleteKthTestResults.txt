@@ -1,0 +1,40 @@
+Nathan HillmanCS2 Linked List Project - Remove Ktha. Empty list
+Original List: 
+0,
+New List after deleting index: 0
+[0,]
+b. Singleton list, position is in list
+Original List: 
+1,
+New List after deleting index: 1
+[]
+c. Singleton list, position is not in list
+Original List: 
+1,
+New List after deleting index: 2
+[1,]
+d. 3 or more nodes, position in list is first
+Original List: 
+1,2,3
+New List after deleting index: 1
+[2,3,]
+e. 3 or more nodes, position in list is last
+Original List: 
+1,2,3,4
+New List after deleting index: 4
+[1,2,3,]
+f. 3 or more nodes, position in list is neither first nor last
+Original List: 
+1,2,3,4
+New List after deleting index: 3
+[1,2,4,]
+g. 3 or more nodes, position is non-positive (not in the list)
+Original List: 
+1,2,3,4,5
+New List after deleting index: -1
+[1,2,3,4,5,]
+h. 3 or more nodes, position is positive but beyond the end of the list 
+Original List: 
+1,2,3,4,5
+New List after deleting index: 6
+[1,2,3,4,5,]

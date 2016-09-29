@@ -1,0 +1,7 @@
+The Slip Hypo tester was a class project created to run simulations on the Three Slip Game with different strategies in order to compare which strategy can result in a better chance of winning.  
+
+	The Three Slip Game was described as a game similar in nature to the Monty Hall Problem.  Three numbers are written on three slips of paper.  The object is to choose the slip with the largest number.  The player chooses a slip, and the number on their choice of slip is revealed. A second slip is then revealed, and the player has the choice of keeping their current slip, switching to the second slip, or switching to the third, unknown slip. Whichever choice is made, the decision is then final, and the third slip is revealed.  If the player's choice is the slip with the largest number, the player wins.  
+
+	This program was written utilizes Apache Ant to build and run it from the command line.  It can be built with the 'ant build' command, and run with the 'ant run' command after being built.  It runs from default values and requires no input from the user, simply displaying the results to the terminal.  
+
+	The Slip Hypo Tester program runs ten million simulations of the Three Slip Game with each of the default strategies, printing out statistics on how often each strategy won over the course of the games.  

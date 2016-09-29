@@ -1,0 +1,26 @@
+/**
+ * Light rail model initialization and
+ * simulation activation.
+ *
+ * @author Dr. Jody Paul
+ * @version 1.0
+ * ($Id$)
+ */
+public final class LightRailSimulationDriver {
+    /**
+     * Initializes model parameters and activates simulation.
+     * @param args To Be Defined
+     */
+    public static void main(final String[] args) {
+        // Create simulation model.
+        Simulation sim = new Simulation();
+        // Establish route.
+
+        // Initialize model.
+
+        // Step through simulation.
+    }
+
+    /** Hidden constructor for utility class. */
+    private LightRailSimulationDriver() { }
+}

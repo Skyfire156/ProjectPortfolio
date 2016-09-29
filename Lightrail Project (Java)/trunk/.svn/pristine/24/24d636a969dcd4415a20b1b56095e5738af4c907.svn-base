@@ -1,0 +1,61 @@
+import java.util.List;
+import java.util.ArrayList;
+/**
+ * A light-rail route.
+ *
+ * @author Dr. Jody Paul
+ * @version 1.0 ($Id$)
+ */
+public class Route {
+    /**
+     * Constructs a Route with no stations.
+     */
+    public Route() {
+    }
+
+    /**
+     * Constructs a Route with one station.
+     * @param firstStation the first station on this route
+     */
+    public Route(final Station firstStation) {
+    }
+
+    /**
+     * Copy constructor.
+     * @param orig the route to be copied
+     */
+    public Route(final Route orig) {
+    }
+
+    /**
+     * Add a station to the end of this route.
+     * (Handles the special case in which the route has not
+     * existing stations by adding this station as the
+     * starting station of the route, ignoring the travel time.)
+     * @param station the station to be appended; ignored if <tt>null</tt>
+     * @param travelTime the time from the previous endpoint of the route
+     *                   to the new station; must not be <tt>null</tt> unless
+     *                   this is the special case of adding the initial
+     *                   station
+     */
+    public void addStation(final Station station, final Time travelTime) {
+    }
+
+    /**
+     * Returns the stations on this route as an ordered list.
+     * @return the stations on this route
+     */
+    public List<Station> stations() {
+        List<Station> slist = new ArrayList<Station>();
+        return slist;
+    }
+
+    /**
+     * Returns the times between stops on this route as an ordered list.
+     * @return the durations between stops on this route
+     */
+    public List<Time> travelTimes() {
+        List<Time> tlist = new ArrayList<Time>();
+        return tlist;
+    }
+}

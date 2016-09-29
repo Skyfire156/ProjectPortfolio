@@ -1,0 +1,52 @@
+/**
+ * A boarding function in which passengers that board
+ * later require increasingly more time to board.
+ *
+ * @author Dr. Jody Paul
+ * @version 1.0 ($Id$)
+ */
+public class DelayedBoarding extends BoardingFunction {
+    /** Time to board a group of passengers. */
+    private Time groupBoardingTime = new Time(0, 1);
+    /** Incremental delay for subsequent groups. */
+    private Time incrementalDelay = new Time(0, 0, 15);
+    /** Size of passenger group that can board simultaneously. */
+    private int groupSize = 10;
+
+    /**
+     * Constructs a boarding function with incremental delays.
+     * @param numberOfSimultaneousBoarders the number of passengers that
+     *            can board simultaneously
+     * @param boardingTime the amount of time it takes for an initial
+     *            group of passengers to board simultaneously
+     * @param delayIncrement the amount of time to add for each subsequent
+     *            group of passengers to board
+     */
+    public DelayedBoarding(final Integer numberOfSimultaneousBoarders,
+                           final Time boardingTime,
+                           final Time delayIncrement) {
+        this.groupSize = numberOfSimultaneousBoarders.intValue();
+        this.groupBoardingTime = boardingTime;
+        this.incrementalDelay = delayIncrement;
+    }
+
+    /**
+     * Computes the time required to board a specified number of passengers.
+     * @param numberOfPassengers the number of passengers
+     * @return the amount of time needed to board the specified
+     *             number of passengers
+     */
+    @Override
+    public Time timeToBoard(final Integer numberOfPassengers) {
+        Time totalBoardingTime = new Time(0, 0, 0);
+        Time boardingDelay = new Time(0, 0, 0);
+        int numberOfGroups = (int) Math.ceil(numberOfPassengers.doubleValue()
+                                             / this.groupSize);
+        for (int i = 0; i < numberOfGroups; i++) {
+            totalBoardingTime.increment(this.groupBoardingTime);
+            totalBoardingTime.increment(boardingDelay);
+            boardingDelay.increment(this.incrementalDelay);
+        }
+        return totalBoardingTime;
+    }
+}

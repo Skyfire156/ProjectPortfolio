@@ -1,0 +1,14 @@
+Testsuite: PassengerArrivalFunctionTest
+Tests run: 6, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.312 sec
+
+Testcase: standardArrivalsTest took 0.063 sec
+Testcase: uniformArrivalsBoundaryTest took 0 sec
+Testcase: poissonArrivalsTest took 0.062 sec
+Testcase: uniformArrivalsTest took 0 sec
+Testcase: poissonArrivalsBoundaryTest took 0 sec
+Testcase: arrivalDataAccessTest took 0.156 sec
+	FAILED
+May fail due to random sequence.
+junit.framework.AssertionFailedError: May fail due to random sequence.
+	at PassengerArrivalFunctionTest.arrivalDataAccessTest(PassengerArrivalFunctionTest.java:19)
+

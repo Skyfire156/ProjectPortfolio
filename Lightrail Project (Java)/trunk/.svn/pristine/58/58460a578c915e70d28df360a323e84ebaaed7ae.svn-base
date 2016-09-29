@@ -1,0 +1,15 @@
+/**
+ * Boarding function that maps a number of passengers
+ * to a duration.
+ *
+ * @author Dr. Jody Paul
+ * @version 1.0 ($Id$)
+ */
+public abstract class BoardingFunction {
+    /**
+     * Returns the time to board a given number of passengers.
+     * @param numberOfPassengers the number of passengers
+     * @return the time required to board
+     */
+    public abstract Time timeToBoard(Integer numberOfPassengers);
+}

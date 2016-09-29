@@ -1,0 +1,288 @@
+<project name="Light Rail Model Simulation" default="all" basedir=".">
+    <description>
+        Build file for Light Rail Model Simulation Project
+        Author: Dr. Jody Paul
+    </description>
+    <!-- $Id$ -->
+
+  <!-- set global properties for this build -->
+  <property name="src" location="."/>
+  <property name="doc" location="doc"/>
+  <property name="build" location="build"/>
+  <property name="dist" location="dist"/>
+  <property name="stylecheck" location="stylecheck"/>
+  <property name="test" location="test"/>
+  <property name="reports" location="${test}/reports"/>
+  <property name="lib" location="lib"/>
+  <!-- cobertura directories -->
+  <property name="cobertura.dir" location="lib/cobertura"/>
+  <property name="coverage.dir" location="coverage"/>
+  <property name="classes.dir" location="coverage/classes"/>
+  <property name="instrumented.dir" location="coverage/instrumented"/>
+  <property name="coverage.reports.dir" location="coverage/reports"/>
+  <property name="coverage.reports.junit.xml.dir" location="coverage/reports/junit-xml"/>
+  <property name="coverage.reports.junit.html.dir" location="coverage/reports/junit-html"/>
+  <property name="coverage.xml.dir" location="coverage/reports//cobertura-xml"/>
+  <property name="coverage.summaryxml.dir" location="coverage/reports/cobertura-summary-xml"/>
+  <property name="coverage.html.dir" location="coverage/reports/cobertura-html"/>
+
+  <path id="classpath">
+    <fileset dir="${lib}" includes="**/*.jar"/>
+  </path>
+
+
+  <target name="all" depends="clean, doc, report, checkstyle"/>
+
+  <target name="init">
+    <!-- Create the time stamp -->
+    <tstamp/>
+    <!-- Create the build directory structure used by compile -->
+    <mkdir dir="${build}"/>
+    <!-- Ensure the ${lib} directory exists -->
+    <mkdir dir="${lib}"/>
+  </target>
+
+  <target name="compile" depends="init"
+        description="compile the source" >
+    <!-- Compile the java code from ${src} into ${build} -->
+    <javac srcdir="${src}" destdir="${build}" classpathref="classpath"
+           debug="on" includeantruntime="false" encoding="cp1252"
+           memoryinitialsize="1024m" memorymaximumsize="1024m" fork="yes">
+      <compilerarg value="-Xlint"/>
+    </javac>
+  </target>
+
+  <target name="run" depends="compile"
+          description="runs driver">
+    <java classname="LightRailSimulationDriver" fork="yes">
+      <classpath>
+        <path refid="classpath"/>
+        <path location="${build}"/>
+      </classpath>
+    </java>
+  </target>
+
+  <target name="test" depends="compile"
+        description="run junit tests" >
+    <!-- Create the test results directory structure -->
+    <mkdir dir="${test}"/>
+    <mkdir dir="${reports}"/>
+    <!-- Execute JUnit tests and save in ${reports} -->
+    <junit printsummary="withOutAndErr" haltonfailure="no" showoutput="true">
+      <classpath>
+        <path refid="classpath"/>
+        <path location="${build}"/>
+      </classpath>
+      <formatter type="xml"/>
+      <formatter type="plain" usefile="false" />
+      <formatter type="plain"/>
+      <batchtest fork="yes" todir="${reports}">
+        <fileset dir="${src}" includes="*Test.java"/>
+      </batchtest>
+    </junit>
+  </target>
+
+  <target name="report" depends="test"
+        description="format junit test results" >
+    <junitreport todir="${reports}">
+      <fileset dir="${reports}" includes="TEST-*.xml"/>
+      <report todir="${reports}"/>
+    </junitreport>
+    <echo></echo>
+    <echo>Report root: ${reports}/index.html</echo>
+  </target>
+
+  <target name="dist" depends="compile"
+        description="generate the distribution" >
+    <!-- Create the distribution directory -->
+    <mkdir dir="${dist}"/>
+    <!-- Put everything in ${build} into the ${ant.project.name}-${DSTAMP}.jar file -->
+    <jar jarfile="${dist}/${ant.project.name}-${DSTAMP}.jar" basedir="${build}"/>
+  </target>
+
+  <target name="chart-probdist" depends="dist"
+          description="create and display probability distribution chart">
+    <java classname="ProbabilityDistributionChart" fork="yes">
+      <classpath>
+        <pathelement location="${dist}/${ant.project.name}-${DSTAMP}.jar"/>
+        <fileset dir="${lib}" includes="**/*.jar"/>
+      </classpath>
+    </java>
+  </target>
+
+  <target name="chart-arrivals" depends="dist"
+          description="create and display passenger arrival chart">
+    <java classname="PassengerArrivalChart" fork="yes">
+      <classpath>
+        <pathelement location="${dist}/${ant.project.name}-${DSTAMP}.jar"/>
+        <fileset dir="${lib}" includes="**/*.jar"/>
+      </classpath>
+    </java>
+  </target>
+
+  <target name="doc" depends="init"
+        description="generate the documentation" >
+    <!-- Create the documentation directory -->
+    <mkdir dir="${doc}"/>
+    <!-- Generate the API documentation for ${src} in ${doc} -->
+    <javadoc access="private" destdir="${doc}" classpathref="classpath" encoding="cp1252" additionalparam="-Xdoclint:none">
+      <fileset dir="${src}" casesensitive="yes" defaultexcludes="yes">
+        <filename name="**/*.java"/>
+      </fileset>
+      <link href="http://download.oracle.com/javase/8/docs/api/" />
+    </javadoc>
+  </target>
+
+  <!-- Define checkstyle task -->
+  <target name="checkstyle" depends="init"
+	  description="generate checkstyle report" >
+    <taskdef resource="com/puppycrawl/tools/checkstyle/ant/checkstyle-ant-task.properties"
+	     classpath="${lib}/checkstyle.jar" />
+    <!-- Verify installation -->
+    <available file="${lib}/checkstyle.jar"
+	       property="checkstyle.available" />
+    <fail unless="checkstyle.available"
+	  message="Error: checkstyle.jar not found." />
+    <available file="${lib}/jp_checks.xml"
+	       property="checks.available" />
+    <fail unless="checks.available"
+	  message="Error: jp_checks.xml not found." />
+    <!-- Create the checkstyle results directory structure -->
+    <mkdir dir="${stylecheck}"/>
+    <!-- Run checkstyle and save results in ${stylecheck} -->
+    <checkstyle config="${lib}/jp_checks.xml"
+		failureProperty="checkstyle.failure"
+		failOnViolation="false" >
+      <fileset dir="${src}" includes="**/*.java" />
+      <formatter type="plain" />
+      <formatter type="xml" tofile="${stylecheck}/checkstyle_report.xml" />
+    </checkstyle>
+    <xslt  in="${stylecheck}/checkstyle_report.xml"
+	   out="${stylecheck}/checkstyle_report.html"
+	   style="${lib}/checkstyle.xsl" />
+    <!-- copy file="${lib}/checkstyle-logo.png" todir="${stylecheck}"/ -->
+    <echo></echo>
+    <echo>Checkstyle Report root: ${stylecheck}/checkstyle_report.html</echo>
+  </target>
+
+  <!-- Cobertura -->
+  <path id="cobertura.classpath">
+    <fileset dir="${cobertura.dir}">
+      <include name="cobertura*.jar"/>
+      <include name="lib/**/*.jar"/>
+    </fileset>
+    <fileset dir="${lib}" includes="**/*.jar"/>
+  </path>
+  <taskdef classpathref="cobertura.classpath" resource="tasks.properties"/>
+  <target name="coberturaInit">
+    <mkdir dir="${coverage.dir}"/>
+    <mkdir dir="${classes.dir}"/>
+    <mkdir dir="${instrumented.dir}"/>
+    <mkdir dir="${coverage.reports.dir}"/>
+    <mkdir dir="${coverage.reports.junit.xml.dir}"/>
+    <mkdir dir="${coverage.reports.junit.html.dir}"/>
+    <mkdir dir="${coverage.xml.dir}"/>
+    <mkdir dir="${coverage.summaryxml.dir}"/>
+    <mkdir dir="${coverage.html.dir}"/>
+  </target>
+  <target name="coberturaCompile" depends="coberturaInit">
+    <javac srcdir="${src}" destdir="${classes.dir}" debug="yes">
+      <classpath refid="cobertura.classpath"/>
+    </javac>
+  </target>
+  <target name="coberturaInstrument" depends="coberturaInit, coberturaCompile">
+    <!-- Remove the coverage data file and any old instrumentation. -->
+    <delete file="cobertura.ser"/>
+    <delete dir="${instrumented.dir}" />
+    <!-- Instrument the application classes, writing to ${instrumented.dir}. -->
+    <cobertura-instrument todir="${instrumented.dir}">
+      <!-- Ignore any source line with reference to slf4j/logback. -->
+      <ignore regex="org.slf4j.*" />
+      <fileset dir="${classes.dir}">
+	<!-- Instrument all application classes, not test classes. -->
+	<include name="**/*.class" />
+	<exclude name="**/*Test.class" />
+      </fileset>
+    </cobertura-instrument>
+  </target>
+  <target name="coberturaTest" depends="coberturaInit, coberturaCompile">
+    <junit fork="yes" dir="${basedir}" failureProperty="test.failed">
+      <!--
+	  Note the classpath order: instrumented classes must be before
+	  original (uninstrumented) classes.  This is important!
+      -->
+      <classpath location="${instrumented.dir}" />
+      <classpath location="${classes.dir}" />
+      <!--
+	  The instrumented classes reference classes used by the
+	  Cobertura runtime, so Cobertura and its dependencies
+	  must be in the classpath.
+      -->
+      <classpath refid="cobertura.classpath" />
+      <formatter type="xml" />
+      <test name="${testcase}" todir="${reports.xml.dir}" if="testcase" />
+      <batchtest todir="${coverage.reports.junit.xml.dir}" unless="testcase">
+	<fileset dir="${src}">
+	  <include name="**/*Test.java" />
+	</fileset>
+      </batchtest>
+    </junit>
+    <junitreport todir="${coverage.reports.junit.xml.dir}">
+      <fileset dir="${coverage.reports.junit.xml.dir}">
+	<include name="TEST-*.xml" />
+      </fileset>
+      <report format="frames" todir="${coverage.reports.junit.html.dir}" />
+    </junitreport>
+  </target>
+  <target name="coberturaCoverageCheck">
+    <cobertura-check branchrate="34" totallinerate="100"/>
+  </target>
+  <target name="coberturaCoverageReport">
+    <!-- Generate XML file with coverage data using "srcdir" attribute. -->
+    <cobertura-report srcdir="${src}" destdir="${coverage.xml.dir}" format="xml"/>
+  </target>
+  <target name="coberturaSummaryCoverageReport">
+    <!-- Generate summary XML file with coverage data using "srcdir" attribute. -->
+    <cobertura-report srcdir="${src}" destdir="${coverage.summaryxml.dir}" format="summaryXml" />
+  </target>
+  <target name="coberturaAlternateCoverageReport">
+    <!-- Generate HTML files with coverage data using nested source filesets. -->
+    <cobertura-report destdir="${coverage.html.dir}">
+      <fileset dir="${src}">
+	<include name="**/*.java"/>
+      </fileset>
+    </cobertura-report>
+    <echo></echo>
+    <echo>Coverage Report root: ${coverage.html.dir}/index.html</echo>
+  </target>
+  <target name="coberturaClean">
+    <delete dir="${coverage.dir}"/>
+    <delete dir="${classes.dir}" />
+    <delete dir="${instrumented.dir}" />
+    <delete dir="${coverage.reports.dir}" />
+    <delete file="cobertura.log" />
+    <delete file="cobertura.ser" />
+  </target>
+  <target name="coverage"
+	  depends="coberturaCompile, coberturaInstrument, coberturaTest, coberturaCoverageReport, coberturaSummaryCoverageReport, coberturaAlternateCoverageReport"
+	  description="Compile, instrument, run tests, and generate JUnit and coverage reports."/>
+  <!-- Cobertura END -->
+
+
+  <target name="clean"
+          description="clean up"
+	  depends="coberturaClean">
+    <!-- Delete the ${build} ${dist} ${doc} ${test} ${reports} and ${stylecheck} directory trees -->
+    <delete dir="${build}"/>
+    <delete dir="${dist}"/>
+    <delete dir="${doc}"/>
+    <delete dir="${reports}"/>
+    <delete dir="${test}"/>
+    <delete dir="${stylecheck}"/>
+    <!-- Delete serialization test files -->
+    <delete>
+      <fileset dir="." includes="*.ser"/>
+    </delete>
+  </target>
+
+</project>

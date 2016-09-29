@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite errors="0" failures="0" hostname="Serenity" name="ScheduleTest" skipped="0" tests="6" time="0.047" timestamp="2016-05-01T20:57:36">
+  <properties>
+    <property name="java.vendor" value="Oracle Corporation" />
+    <property name="coverage.summaryxml.dir" value="C:\Users\Nate\Desktop\School Stuff\Spring 2016\lightrail\trunk\coverage\reports\cobertura-summary-xml" />
+    <property name="sun.java.launcher" value="SUN_STANDARD" />
+    <property name="coverage.reports.dir" value="C:\Users\Nate\Desktop\School Stuff\Spring 2016\lightrail\trunk\coverage\reports" />
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers" />
+    <property name="dist" value="C:\Users\Nate\Desktop\School Stuff\Spring 2016\lightrail\trunk\dist" />
+    <property name="lib" value="C:\Users\Nate\Desktop\School Stuff\Spring 2016\lightrail\trunk\lib" />
+    <property name="os.name" value="Windows 7" />
+    <property name="sun.boot.class.path" value="C:\Program Files\Java\jdk1.8.0_11\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_11\jre\lib\rt.jar;C:\Program Files\Java\jdk1.8.0_11\jre\lib\sunrsasign.jar;C:\Program Files\Java\jdk1.8.0_11\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_11\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_11\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_11\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_11\jre\classes" />
+    <property name="TODAY" value="May 1 2016" />
+    <property name="sun.desktop" value="windows" />
+    <property name="java.vm.specification.vendor" value="Oracle Corporation" />
+    <property name="ant.home" value="C:\Users\Nate\Desktop\Unused Downloads\apache-ant-1.9.6" />
+    <property name="java.runtime.version" value="1.8.0_11-b12" />
+    <property name="cobertura.dir" value="C:\Users\Nate\Desktop\School Stuff\Spring 2016\lightrail\trunk\lib\cobertura" />
+    <property name="user.name" value="Nate" />
+    <property name="reports" value="C:\Users\Nate\Desktop\School Stuff\Spring 2016\lightrail\trunk\test\reports" />
+    <property name="user.language" value="en" />
+    <property name="build" value="C:\Users\Nate\Desktop\School Stuff\Spring 2016\lightrail\trunk\build" />
+    <property name="coverage.reports.junit.html.dir" value="C:\Users\Nate\Desktop\School Stuff\Spring 2016\lightrail\trunk\coverage\reports\junit-html" />
+    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_11\jre\bin" />
+    <property name="ant.project.default-target" value="all" />
+    <property name="ant.project.name" value="Light Rail Model Simulation" />
+    <property name="DSTAMP" value="20160501" />
+    <property name="java.version" value="1.8.0_11" />
+    <property name="coverage.html.dir" value="C:\Users\Nate\Desktop\School Stuff\Spring 2016\lightrail\trunk\coverage\reports\cobertura-html" />
+    <property name="user.timezone" value="America/Denver" />
+    <property name="sun.arch.data.model" value="64" />
+    <property name="java.endorsed.dirs" value="C:\Program Files\Java\jdk1.8.0_11\jre\lib\endorsed" />
+    <property name="doc" value="C:\Users\Nate\Desktop\School Stuff\Spring 2016\lightrail\trunk\doc" />
+    <property name="sun.cpu.isalist" value="amd64" />
+    <property name="sun.jnu.encoding" value="Cp1252" />
+    <property name="file.encoding.pkg" value="sun.io" />
+    <property name="file.separator" value="\" />
+    <property name="java.specification.name" value="Java Platform API Specification" />
+    <property name="stylecheck" value="C:\Users\Nate\Desktop\School Stuff\Spring 2016\lightrail\trunk\stylecheck" />
+    <property name="classes.dir" value="C:\Users\Nate\Desktop\School Stuff\Spring 2016\lightrail\trunk\coverage\classes" />
+    <property name="java.class.version" value="52.0" />
+    <property name="src" value="C:\Users\Nate\Desktop\School Stuff\Spring 2016\lightrail\trunk" />
+    <property name="user.country" value="US" />
+    <property name="ant.file.type.Light Rail Model Simulation" value="file" />
+    <property name="java.home" value="C:\Program Files\Java\jdk1.8.0_11\jre" />
+    <property name="java.vm.info" value="mixed mode" />
+    <property name="ant.file" value="C:\Users\Nate\Desktop\School Stuff\Spring 2016\lightrail\trunk\build.xml" />
+    <property name="os.version" value="6.1" />
+    <property name="path.separator" value=";" />
+    <property name="java.vm.version" value="25.11-b03" />
+    <property name="user.variant" value="" />
+    <property name="ant.library.dir" value="C:\Users\Nate\Desktop\Unused Downloads\apache-ant-1.9.6\lib" />
+    <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob" />
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle" />
+    <property name="awt.toolkit" value="sun.awt.windows.WToolkit" />
+    <property name="ant.file.Light Rail Model Simulation" value="C:\Users\Nate\Desktop\School Stuff\Spring 2016\lightrail\trunk\build.xml" />
+    <property name="sun.stdout.encoding" value="cp437" />
+    <property name="user.script" value="" />
+    <property name="coverage.dir" value="C:\Users\Nate\Desktop\School Stuff\Spring 2016\lightrail\trunk\coverage" />
+    <property name="user.home" value="C:\Users\Nate" />
+    <property name="java.specification.vendor" value="Oracle Corporation" />
+    <property name="test" value="C:\Users\Nate\Desktop\School Stuff\Spring 2016\lightrail\trunk\test" />
+    <property name="coverage.xml.dir" value="C:\Users\Nate\Desktop\School Stuff\Spring 2016\lightrail\trunk\coverage\reports\cobertura-xml" />
+    <property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_11\jre\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files\CollabNet\Subversion Client;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files (x86)\Skype\Phone\;C:\Users\Nate\Desktop\Unused Downloads\apache-ant-1.9.6/bin;C:\Program Files\Java\jdk1.8.0_11/bin;." />
+    <property name="java.vendor.url" value="http://java.oracle.com/" />
+    <property name="java.vm.vendor" value="Oracle Corporation" />
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment" />
+    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner ScheduleTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false formatter=org.apache.tools.ant.taskdefs.optional.junit.OutErrSummaryJUnitResultFormatter showoutput=true outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=false formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,C:\Users\Nate\Desktop\School Stuff\Spring 2016\lightrail\trunk\test\reports\TEST-ScheduleTest.xml formatter=org.apache.tools.ant.taskdefs.optional.junit.PlainJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.PlainJUnitResultFormatter,C:\Users\Nate\Desktop\School Stuff\Spring 2016\lightrail\trunk\test\reports\TEST-ScheduleTest.txt crashfile=C:\Users\Nate\Desktop\School Stuff\Spring 2016\lightrail\trunk\junitvmwatcher5301191435897427781.properties propsfile=C:\Users\Nate\Desktop\School Stuff\Spring 2016\lightrail\trunk\junit892598450435561543.properties" />
+    <property name="java.class.path" value="C:\Users\Nate\Desktop\School Stuff\Spring 2016\lightrail\trunk\lib\checkstyle.jar;C:\Users\Nate\Desktop\School Stuff\Spring 2016\lightrail\trunk\lib\cobertura\asm-5.0.1.jar;C:\Users\Nate\Desktop\School Stuff\Spring 2016\lightrail\trunk\lib\cobertura\asm-analysis-5.0.1.jar;C:\Users\Nate\Desktop\School Stuff\Spring 2016\lightrail\trunk\lib\cobertura\asm-commons-5.0.1.jar;C:\Users\Nate\Desktop\School Stuff\Spring 2016\lightrail\trunk\lib\cobertura\asm-tree-5.0.1.jar;C:\Users\Nate\Desktop\School Stuff\Spring 2016\lightrail\trunk\lib\cobertura\asm-util-5.0.1.jar;C:\Users\Nate\Desktop\School Stuff\Spring 2016\lightrail\trunk\lib\cobertura\cobertura-2.1.1.jar;C:\Users\Nate\Desktop\School Stuff\Spring 2016\lightrail\trunk\lib\cobertura\commons-lang3-3.3.2.jar;C:\Users\Nate\Desktop\School Stuff\Spring 2016\lightrail\trunk\lib\cobertura\logback-classic-1.0.13.jar;C:\Users\Nate\Desktop\School Stuff\Spring 2016\lightrail\trunk\lib\cobertura\logback-core-1.0.13.jar;C:\Users\Nate\Desktop\School Stuff\Spring 2016\lightrail\trunk\lib\cobertura\oro-2.0.8.jar;C:\Users\Nate\Desktop\School Stuff\Spring 2016\lightrail\trunk\lib\cobertura\slf4j-api-1.7.5.jar;C:\Users\Nate\Desktop\School Stuff\Spring 2016\lightrail\trunk\lib\hamcrest-core.jar;C:\Users\Nate\Desktop\School Stuff\Spring 2016\lightrail\trunk\lib\jcommon-1.0.23.jar;C:\Users\Nate\Desktop\School Stuff\Spring 2016\lightrail\trunk\lib\jfreechart-1.0.19.jar;C:\Users\Nate\Desktop\School Stuff\Spring 2016\lightrail\trunk\lib\junit.jar;C:\Users\Nate\Desktop\School Stuff\Spring 2016\lightrail\trunk\build;C:\Users\Nate\Desktop\Unused Downloads\apache-ant-1.9.6\lib\ant-launcher.jar;C:\Users\Nate\Desktop\Unused Downloads\apache-ant-1.9.6\lib\ant.jar;C:\Users\Nate\Desktop\Unused Downloads\apache-ant-1.9.6\lib\ant-junit.jar;C:\Users\Nate\Desktop\Unused Downloads\apache-ant-1.9.6\lib\ant-junit4.jar" />
+    <property name="ant.version" value="Apache Ant(TM) version 1.9.6 compiled on June 29 2015" />
+    <property name="TSTAMP" value="1457" />
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification" />
+    <property name="ant.file.type" value="file" />
+    <property name="java.vm.specification.version" value="1.8" />
+    <property name="sun.os.patch.level" value="Service Pack 1" />
+    <property name="sun.cpu.endian" value="little" />
+    <property name="java.io.tmpdir" value="C:\Users\Nate\AppData\Local\Temp\" />
+    <property name="coverage.reports.junit.xml.dir" value="C:\Users\Nate\Desktop\School Stuff\Spring 2016\lightrail\trunk\coverage\reports\junit-xml" />
+    <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/" />
+    <property name="instrumented.dir" value="C:\Users\Nate\Desktop\School Stuff\Spring 2016\lightrail\trunk\coverage\instrumented" />
+    <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment" />
+    <property name="os.arch" value="amd64" />
+    <property name="java.ext.dirs" value="C:\Program Files\Java\jdk1.8.0_11\jre\lib\ext;C:\Windows\Sun\Java\lib\ext" />
+    <property name="user.dir" value="C:\Users\Nate\Desktop\School Stuff\Spring 2016\lightrail\trunk" />
+    <property name="line.separator" value="&#xd;&#xa;" />
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM" />
+    <property name="basedir" value="C:\Users\Nate\Desktop\School Stuff\Spring 2016\lightrail\trunk" />
+    <property name="ant.java.version" value="1.8" />
+    <property name="ant.core.lib" value="C:\Users\Nate\Desktop\Unused Downloads\apache-ant-1.9.6\lib\ant.jar" />
+    <property name="sun.stderr.encoding" value="cp437" />
+    <property name="file.encoding" value="Cp1252" />
+    <property name="java.specification.version" value="1.8" />
+    <property name="ant.project.invoked-targets" value="report" />
+  </properties>
+  <testcase classname="ScheduleTest" name="chronologicalOrderTest" time="0.015" />
+  <testcase classname="ScheduleTest" name="testCopyConstructor" time="0.0" />
+  <testcase classname="ScheduleTest" name="emptyTimeListTest" time="0.0" />
+  <testcase classname="ScheduleTest" name="addDepartureTimeTest" time="0.0" />
+  <testcase classname="ScheduleTest" name="testForDuplicateDepartureTimesByListSize" time="0.0" />
+  <testcase classname="ScheduleTest" name="additionalAddDepartureTest" time="0.0" />
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

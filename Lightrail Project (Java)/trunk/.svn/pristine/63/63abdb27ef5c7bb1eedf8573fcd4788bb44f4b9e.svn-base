@@ -1,0 +1,196 @@
+import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.Test;
+import java.util.List;
+import java.util.ArrayList;
+/**
+ * Tests for class Train.
+ *
+ * @author  Dr. Jody Paul
+ * @version 1.1 ($Id$)
+ */
+public class TrainTest {
+    /** Test capacity. */
+    private static final int CAP = 100;
+    /** Test train. */
+    private Train trainH;
+
+    /** Sample start station. */
+    private Station start;
+    /** Sample destination station. */
+    private Station destination;
+    /** Alt sample start station. */
+    private Station altStart;
+    /** Alt sample destination station. */
+    private Station altDestination;
+
+    /**
+     * Sets up the test fixture.
+     *
+     * Called before every test case method.
+     */
+    @Before
+    public void setUp() {
+        this.start = new Station("The Start");
+        this.destination = new Station("The Destination");
+        this.altStart = new Station("Alt Start");
+        this.altDestination = new Station("Alt Destination");
+        this.trainH = new Train(CAP);
+    }
+
+    /**
+     * Fill the given train to its maximum capacity.
+     * @param t the train
+     */
+    private void fillTrain(final Train t) {
+        for (int i = t.numberOfPassengersOnBoard(); i < t.maximumCapacity(); i++) {
+            t.board(new Passenger(start, destination));
+        }
+    }
+
+    @Test
+    public void capacityTest() {
+        Train train0 = new Train(0);
+        assertEquals(0, train0.maximumCapacity());
+        assertEquals(CAP, this.trainH.maximumCapacity());
+    }
+
+    @Test
+    public void boardTest() {
+        Train train4 = new Train(4);
+        assertEquals(4, train4.maximumCapacity());
+        assertEquals(0, train4.numberOfPassengersOnBoard());
+        Station sA = new Station("A");
+        Station sB = new Station("B");
+        assertTrue(train4.board(new Passenger(sA, sB)));
+        assertEquals(1, train4.numberOfPassengersOnBoard());
+        for (int i = train4.numberOfPassengersOnBoard();
+             i < train4.maximumCapacity();
+             i++) {
+               assertTrue(train4.board(new Passenger(sA, sB)));
+               assertEquals(i + 1, train4.numberOfPassengersOnBoard());
+        }
+    }
+
+    @Test
+    public void repeatBoardTest() {
+        assertEquals(CAP, this.trainH.maximumCapacity());
+        assertEquals(0, this.trainH.numberOfPassengersOnBoard());
+        Station sA = new Station("A");
+        Station sB = new Station("B");
+        for (int i = 0; i < 3; i++) {
+            assertTrue(this.trainH.board(new Passenger(sA, sB)));
+        }
+        assertEquals(3, this.trainH.numberOfPassengersOnBoard());
+        Passenger repeater = new Passenger(sA, sB);
+        assertTrue(this.trainH.board(repeater));
+        assertEquals(4, this.trainH.numberOfPassengersOnBoard());
+        assertFalse(this.trainH.board(repeater));
+        assertEquals(4, this.trainH.numberOfPassengersOnBoard());
+    }
+
+    @Test
+    public void overBoardTest() {
+        Train train5 = new Train(5);
+        assertEquals(5, train5.maximumCapacity());
+        assertEquals(0, train5.numberOfPassengersOnBoard());
+        Station sA = new Station("A");
+        Station sB = new Station("B");
+        for (int i = train5.numberOfPassengersOnBoard();
+             i < train5.maximumCapacity();
+             i++) {
+                assertTrue(train5.board(new Passenger(sA, sB)));
+        }
+        assertEquals(5, train5.numberOfPassengersOnBoard());
+        assertFalse(train5.board(new Passenger(sA, sB)));
+        assertEquals(5, train5.numberOfPassengersOnBoard());
+        // Use this.trainH.
+        fillTrain(this.trainH);
+        assertEquals(CAP, this.trainH.numberOfPassengersOnBoard());
+        assertFalse(this.trainH.board(new Passenger(sA, sB)));
+        assertEquals(CAP, this.trainH.numberOfPassengersOnBoard());
+    }
+
+    @Test
+    public void boardAllTest() {
+        assertEquals(CAP, this.trainH.maximumCapacity());
+        assertEquals(0, this.trainH.numberOfPassengersOnBoard());
+        assertEquals(0, this.trainH.passengers().size());
+        List<Passenger> plist = new ArrayList<Passenger>();
+        for (int i = 0; i < 10; i++) {
+            plist.add(new Passenger(this.start, this.destination));
+            plist.add(new Passenger(this.altStart, this.altDestination));
+        }
+        assertEquals(20, plist.size());
+        assertTrue(this.trainH.boardAll(plist));
+        assertEquals(20, this.trainH.numberOfPassengersOnBoard());
+        assertEquals(20, this.trainH.passengers().size());
+        assertTrue(this.trainH.passengers().containsAll(plist));
+    }
+
+    @Test
+    public void passengersTest() {
+        Passenger pass1 = new Passenger(start, destination);
+        assertEquals(true, this.trainH.board(pass1));
+        assertEquals(1, this.trainH.numberOfPassengersOnBoard());
+        assertEquals(1, this.trainH.passengers().size());
+        assertTrue(this.trainH.passengers().contains(pass1));
+        for (int i = 0; i < 3; i++) {
+            this.trainH.board(new Passenger(start, destination));
+        }
+        assertEquals(4, this.trainH.numberOfPassengersOnBoard());
+        assertEquals(4, this.trainH.passengers().size());
+        assertTrue(this.trainH.passengers().contains(pass1));
+        for (Passenger p : this.trainH.passengers()) {
+            assertEquals(start, p.start());
+            assertEquals(destination, p.destination());
+        }
+    }
+
+    @Test
+    public void disembarkTest() {
+        Passenger pass = new Passenger(this.start, this.destination);
+        assertTrue(this.trainH.board(pass));
+        assertEquals(1, this.trainH.numberOfPassengersOnBoard());
+        assertFalse(this.trainH.disembark(null));
+        assertFalse(this.trainH.disembark(new Passenger(this.altStart,
+                                                        this.destination)));
+        assertEquals(1, this.trainH.numberOfPassengersOnBoard());
+        assertTrue(this.trainH.disembark(pass));
+        assertEquals(0, this.trainH.numberOfPassengersOnBoard());
+        assertFalse(this.trainH.disembark(pass));
+    }
+
+    @Test
+    public void disembarkAllTest() {
+        assertEquals(0, this.trainH.numberOfPassengersOnBoard());
+        List<Passenger> plistA = new ArrayList<Passenger>();
+        for (int i = 0; i < 10; i++) {
+            plistA.add(new Passenger(this.altStart, this.altDestination));
+        }
+        List<Passenger> plistB = new ArrayList<Passenger>();
+        for (int i = 0; i < 10; i++) {
+            plistB.add(new Passenger(this.start, this.destination));
+        }
+        assertTrue(this.trainH.boardAll(plistA));
+        assertEquals(10, this.trainH.numberOfPassengersOnBoard());
+        assertTrue(this.trainH.passengers().containsAll(plistA));
+        assertTrue(this.trainH.boardAll(plistB));
+        assertEquals(20, this.trainH.numberOfPassengersOnBoard());
+        assertTrue(this.trainH.passengers().containsAll(plistB));
+        Passenger pass = new Passenger(this.start, this.destination);
+        assertTrue(this.trainH.board(pass));
+        assertFalse(this.trainH.disembarkAll(null));
+        assertFalse(this.trainH.disembarkAll(new ArrayList<Passenger>()));
+        assertEquals(21, this.trainH.numberOfPassengersOnBoard());
+        assertTrue(this.trainH.disembarkAll(plistA));
+        assertEquals(11, this.trainH.numberOfPassengersOnBoard());
+        assertTrue(this.trainH.passengers().containsAll(plistB));
+        assertTrue(this.trainH.passengers().contains(pass));
+        assertFalse(this.trainH.disembarkAll(plistA));
+        assertEquals(11, this.trainH.numberOfPassengersOnBoard());
+        assertTrue(this.trainH.disembarkAll(plistB));
+        assertEquals(1, this.trainH.numberOfPassengersOnBoard());
+        assertTrue(this.trainH.passengers().contains(pass));
+    }
+}

@@ -1,0 +1,1 @@
+This is a little script written with Python to keep track of initiative order while playing Pathfinder.  It makes use of Tkinter to implement a simple GUI.    

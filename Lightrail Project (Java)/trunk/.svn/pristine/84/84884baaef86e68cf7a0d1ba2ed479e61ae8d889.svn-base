@@ -1,0 +1,83 @@
+import java.util.Collection;
+/**
+ * A light rail train.
+ *
+ * @author Dr. Jody Paul
+ * @version 1.0 ($Id$)
+ */
+public class Train {
+    /** The default maximum capacity of a train. */
+    public static final int DEFAULT_CAPACITY = 120;
+
+    /**
+     * Constructs a train with a maximum capacity.
+     * @param capacity the maximum number of passengers;
+     *        if less than zero, uses default capacity
+     */
+    public Train(final int capacity) {
+    }
+
+    /**
+     * Boards a passenger onto this train.
+     * @param passenger the passenger to board; must not be <tt>null</tt>
+     * @return <tt>true</tt> if the passenger was not already on this train
+     *         and was permitted to board (within capacity)
+     */
+    public boolean board(final Passenger passenger) {
+        return false;
+    }
+
+    /**
+     * Boards all passengers in the parameter onto this train.
+     * If boarding the number of passengers would cause the maximum
+     * capacity to be exceeded, none are boarded.
+     * @param passengerGroup the passenger to board; must not be <tt>null</tt>
+     * @return <tt>true</tt> if any of the passengers boarded the train
+     */
+    public boolean boardAll(final Collection<Passenger> passengerGroup) {
+        return false;
+    }
+
+    /**
+     * Disembarks a passenger from this train.
+     * @param passenger the passenger to disembark
+     * @return <tt>true</tt> if the passenger was on this train
+     */
+    public boolean disembark(final Passenger passenger) {
+        return false;
+    }
+
+    /**
+     * Disembarks the collection of passengers from this train.
+     * @param passengerGroup the passengers to disembark;
+     *                       ignored if <tt>null</tt>
+     * @return <tt>true</tt> if any of the passengers were on this train
+     */
+    public boolean disembarkAll(final Collection<Passenger> passengerGroup) {
+        return false;
+    }
+
+    /**
+     * Retrieves the passengers on this train.
+     * @return the passengers
+     */
+    public Collection<Passenger> passengers() {
+        return null;
+    }
+
+    /**
+     * Retrieves the number of passengers on this train.
+     * @return the number of passengers
+     */
+    public int numberOfPassengersOnBoard() {
+        return -42;
+    }
+
+    /**
+     * Retrieves the maximum capacity of this train.
+     * @return the maximum number of passengers allowed
+     */
+    public int maximumCapacity() {
+        return -84;
+    }
+}
