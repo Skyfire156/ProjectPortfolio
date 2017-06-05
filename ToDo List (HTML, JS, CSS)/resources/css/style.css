@@ -25,16 +25,45 @@ header {
 
 }
 
-header input {
-	width: 100%;
+header input#item {
+	width: 90%;
 	height: 50px;
 	font-size: 15px;
 	font-weight: normal;
+	color: #A3DFFF;
 	text-indent: 15px;
 	padding: 0 70px 0 0;
 	float: left;
 	background-color: rgba(155, 155, 155, 0.2);
 	border-radius: 5px;
+}
+
+header div#itemoptions {
+	position: absolute;
+	top: 35px;
+	right: 300px;
+}
+
+header div#itemoptions label {
+	margin: 0 100px 0 3px;
+	position: relative;
+	top: -2px;
+
+}
+
+header div#itemoptions input#dailyCheck:checked + label {
+	margin: 0 10px 0 3px;
+}
+
+header div#itemoptions input#dailyCheck:checked ~ select#timegoal {
+	display: inline;
+	width: 85px;
+	position: relative;
+	top: -3px;
+}
+
+header div#itemoptions select {
+	display: none;
 }
 
 header input::-webkit-input-placeholder {
@@ -46,7 +75,7 @@ header button {
 	height: 50px;
 	position: absolute;
 	top:15px;
-	right: 15px;
+	right: 180px;
 	z-index: 2;
 	border-radius: 5px;
 	background-color: #FFFFFF;
@@ -66,6 +95,19 @@ header button svg .fill {
 	fill: #183DA5;
 }
 
+header div#dayleft {
+	width: 150px;
+	height: 80px;
+	color: #A3DFFF;
+	font-size: 14px;
+	float: right;
+	padding: 0 0 0 15px;
+}
+
+header div#daypercent {
+	font-size: 33px;
+}
+
 div.container {
 	width: 100%;
 	float: left;
@@ -78,12 +120,12 @@ ul.todo {
 
 }
 
-ul.todo#completed:not(:empty) {
+ul.todo#incomplete:not(:empty) {
 	position: relative;
 	padding: 60px 0 0 0;
 }
 
-ul.todo#completed:not(:empty):before {
+ul.todo#completing:not(:empty):after {
 	content: '';
 	width: 150px;
 	height: 1px;
@@ -110,6 +152,23 @@ ul.todo li {
 	margin: 0 0 10px 0;
 	padding: 14px 100px 14px 14px;
 
+}
+
+ul.todo li label#daylabel {
+	position: relative;
+	margin: 0 0 0 30px;
+	font-size: 12px;
+}
+
+ul.todo li div#loadbar {
+	height: 51px;
+	width: 0%;
+	border-radius: 5px;
+
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: rgba(0, 0, 153, 0.2);
 }
 
 ul.todo li:last-of-type {
@@ -180,20 +239,20 @@ ul.todo li .buttons button.complete svg .fill {
 	fill: #183DA5;
 }
 
-ul.todo#completed li .buttons button.complete svg {
+ul.todo#completing li .buttons button.complete svg {
 	background: #FFEE0A;
 	border: 0px;
 }
 
-ul.todo#completed li .buttons button.complete svg .fill {
+ul.todo#completing li .buttons button.complete svg .fill {
 	fill: #232323;
 }
 
-ul.todo:not(#completed) li .buttons button.complete:hover svg {
+ul.todo:not(#completing) li .buttons button.complete:hover svg {
 	background: rgba(24, 61, 165, 0.75);
 }
 
-ul.todo:not(#completed) li .buttons button.complete:hover svg .fill {
+ul.todo:not(#completing) li .buttons button.complete:hover svg .fill {
 	fill: #797979;
 }
 
