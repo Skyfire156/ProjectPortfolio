@@ -1,0 +1,247 @@
+@charset: "UTF-8";
+
+div#container {
+	width: 100%;
+	height: 100%;
+	background: #232323;
+}
+
+input[type=checkbox] {
+	display: none;
+}
+
+input[type=button].centerB {
+
+
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -24px;
+	margin-left: -24px;
+
+	z-index: 5;
+
+	height: 48px;
+	width: 48px;
+	background-color: #EFCE0B;
+	outline: none;
+	box-shadow: 0 0 3px 3px #DC1405;
+
+	border: 2px solid #EFCE0B;
+	border-radius: 100%;
+}
+
+div#top_left {
+	height: 50%;
+	width: 50%;
+	position: relative;
+	float: left;
+	top: 0;
+	left: 0;
+}
+
+div#top_right {
+	height: 50%;
+	width: 50%;
+	position: relative;
+	float: right;
+	top: 0;
+	right: 0;
+}
+
+div#bottom_left {
+	height: 50%;
+	width: 50%;
+	position: relative;
+	float: left;
+	bottom: 0;
+	left: 0;
+}
+
+div#bottom_right {
+	height: 50%;
+	width: 50%;
+	position: relative;
+	float: right;
+	bottom: 0;
+	right: 0;
+}
+
+
+div#container label {
+	height: 0px; 
+    width: 0px;
+    margin: 2px;
+
+    font-size: 12px;
+   
+	position: absolute;
+}
+
+div#container label.top {
+	bottom: 0px;
+	border-top: 25px solid;
+}
+
+div#container label.bottom {
+	top: 0px;
+	border-bottom: 25px solid;
+}
+
+div#container label.left {
+	right: 0px;
+	border-left: 25px solid;
+}
+
+div#container label.right {
+	left: 0px;
+	border-right: 25px solid;
+}
+
+div#container label.inner {
+	z-index: 3;
+	padding: 15px;
+	transition: padding 0.3s;
+}
+
+div#container label.outer {
+	padding: 31px;
+	transition: padding 0.3s;
+}
+
+div#container input.inner:checked ~ label.inner {
+	padding: 100px;
+	transition: padding 0.3s;
+}
+
+
+div#container input[type=checkbox]:checked ~label.outer {
+	padding: 115px;
+	transition: padding 0.3s;
+}
+
+div#container input.inner:checked ~ input.outer:checked ~ label.outer {
+	padding: 215px;
+	transition: padding 0.3s;
+}
+
+div#container label.top.left {
+	border-top-left-radius: 100%;
+}
+
+div#container label.top.right {
+	border-top-right-radius: 100%; 
+}
+
+div#container label.bottom.right {
+	border-bottom-right-radius: 100%;
+}
+
+div#container label.bottom.left {
+	border-bottom-left-radius: 100%;
+}
+
+div#container label.top.inner {
+	border-color: #00C0FF !important;
+}
+
+div#container label.bottom.inner {
+	border-color: #EFCE0B !important;
+}
+
+div#container label.outer {
+	border-color: #DC1405 !important;
+}
+
+div#container ul {
+	width: 190px;
+	position: absolute;
+	margin-bottom: 3px;
+	z-index: 0;
+}
+
+div#container ul.outer {
+	width: 220px;
+	transition: width 0.3s;
+}
+
+div#container input.inner:checked ~ ul.outer {
+	width: 420px;	
+}
+
+div#container input.inner:checked ~ input.outer:checked ~ ul.outer {
+	z-index: 2;
+}
+
+div#container input.inner:checked ~ ul.inner {
+	z-index: 4;
+}
+
+div#container ul.top{
+	bottom: 0;
+}
+
+div#container ul.right{
+	left: 0;
+}
+
+div#container ul.bottom{
+	top: 0;
+}
+
+div#container ul.left{
+	right: 0;
+}
+
+div#container ul li{
+	display: block;
+	opacity: 0;
+
+	position: absolute;
+	bottom: 0;
+}
+
+div#container input.inner:checked ~ ul.inner li {
+	display: block;
+	width: 100%;
+	height: 15px;
+	color: #797979;
+	opacity: 1;
+
+	transition: all 0.7s;
+}
+
+div#container input.outer:checked ~ ul.outer li {
+	display: block;
+	width: 100%;
+	height: 15px;
+	color: #797979;
+	opacity: 1;
+
+	transition: all 0.7s;
+}
+
+div#container ul.left li {
+	left: 0;
+	transform-origin: bottom right;
+}
+
+div#container ul.right li {
+	right: 0;
+	transform-origin: bottom left;
+	text-align: right;
+}
+
+div#container ul li a {
+	pointer-events: none;
+	text-decoration: none;
+	color: #DC1405;
+}
+
+div#container input[type=checkbox]:checked ~ ul li a {
+	pointer-events: auto;
+}
+
+div#container ul li a:hover {
+	color: #00C0FF;
+} 
